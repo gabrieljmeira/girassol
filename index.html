@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girassol Restaurante | O Melhor Buffet do Centro Histórico</title>
+    <meta name="description" content="Descubra o Girassol Restaurante no Centro Histórico de Porto Alegre. Buffet livre com churrasco, variedade de saladas, sobremesas inclusas e vista incrível.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (CDN for standalone file) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1B2A22',      // Deep green/black for elegance
+                            green: '#2C4A3B',     // Primary green (freshness, nature)
+                            yellow: '#EAB308',    // Sunflower yellow (CTA, energy)
+                            yellowHover: '#CA8A04',
+                            light: '#FAFAF9',     // Off-white background
+                            sand: '#F5F5F0',      // Secondary background
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Animations and Specific UI refinements -->
+    <style>
+        /* Base styles */
+        body {
+            background-color: #FAFAF9;
+            color: #1B2A22;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay utilities for grid items */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom subtle grain overlay for premium photo feel */
+        .bg-overlay {
+            background: linear-gradient(180deg, rgba(27, 42, 34, 0.4) 0%, rgba(27, 42, 34, 0.8) 100%);
+        }
+
+        /* Hide scrollbar for gallery if needed */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-yellow selection:text-brand-dark">
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-sun text-brand-yellow text-2xl"></i>
+                    <span class="font-serif text-2xl font-bold tracking-tight text-brand-dark">Girassol</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#sobre" class="text-sm font-medium text-gray-600 hover:text-brand-yellow transition-colors">O Restaurante</a>
+                    <a href="#cardapio" class="text-sm font-medium text-gray-600 hover:text-brand-yellow transition-colors">Cardápio</a>
+                    <a href="#avaliacoes" class="text-sm font-medium text-gray-600 hover:text-brand-yellow transition-colors">Avaliações</a>
+                    <a href="#contato" class="px-5 py-2.5 rounded-full bg-brand-dark text-white text-sm font-medium hover:bg-brand-green transition-colors shadow-lg shadow-brand-dark/20 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot"></i> Como Chegar
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-dark focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg">
+                <a href="#sobre" class="block px-3 py-3 text-base font-medium text-gray-800 hover:bg-gray-50 rounded-md">O Restaurante</a>
+                <a href="#cardapio" class="block px-3 py-3 text-base font-medium text-gray-800 hover:bg-gray-50 rounded-md">Cardápio</a>
+                <a href="#avaliacoes" class="block px-3 py-3 text-base font-medium text-gray-800 hover:bg-gray-50 rounded-md">Avaliações</a>
+                <a href="#contato" class="mt-4 block text-center px-5 py-3 rounded-md bg-brand-dark text-white text-base font-medium hover:bg-brand-green">
+                    Como Chegar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-[90vh] min-h-[600px] flex items-center justify-center pt-20">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <!-- Using a high-quality buffet/food image placeholder -->
+            <img src="https://images.unsplash.com/photo-1590311825124-73ec5233cb0a?auto=format&fit=crop&q=80&w=2000" alt="Buffet variado do Girassol Restaurante" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 bg-overlay"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto reveal active">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 text-white text-sm font-medium">
+                <span class="text-brand-yellow">★ 4.7</span>
+                <span class="opacity-80">Mais de 3.200 avaliações no Google</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6 drop-shadow-lg">
+                Tradição e Sabor no <br class="hidden md:block"/>Coração de Porto Alegre
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
+                Descubra nosso oásis gastronômico no 4º andar. Um buffet livre completo com carnes grelhadas, saladas frescas e sobremesas irresistíveis inclusas.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#contato" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-yellow text-brand-dark text-base font-semibold hover:bg-brand-yellowHover transition-all transform hover:-translate-y-1 shadow-xl flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-map-location-dot"></i> Ver Rota no Mapa
+                </a>
+                <a href="#sobre" class="w-full sm:w-auto px-8 py-4 rounded-full bg-transparent border border-white text-white text-base font-medium hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    Conhecer o Espaço
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <a href="#sobre" class="text-white/70 hover:text-white transition-colors">
+                <i class="fa-solid fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Diferenciais (Quick Info) -->
+    <section class="relative z-20 -mt-12 px-4 max-w-7xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+            <div class="text-center md:px-6 reveal">
+                <div class="w-14 h-14 mx-auto bg-brand-sand rounded-full flex items-center justify-center mb-4 text-brand-green text-2xl">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <h3 class="font-serif font-bold text-xl mb-2 text-brand-dark">Preço Justo</h3>
+                <p class="text-gray-500 text-sm">R$ 40 – 60 por pessoa. Buffet à vontade com o melhor custo-benefício do Centro.</p>
+            </div>
+            <div class="text-center md:px-6 pt-6 md:pt-0 reveal delay-100">
+                <div class="w-14 h-14 mx-auto bg-brand-sand rounded-full flex items-center justify-center mb-4 text-brand-green text-2xl">
+                    <i class="fa-solid fa-ice-cream"></i>
+                </div>
+                <h3 class="font-serif font-bold text-xl mb-2 text-brand-dark">Sobremesa Inclusa</h3>
+                <p class="text-gray-500 text-sm">O famoso pudim e diversas frutas frescas para fechar sua refeição com chave de ouro.</p>
+            </div>
+            <div class="text-center md:px-6 pt-6 md:pt-0 reveal delay-200">
+                <div class="w-14 h-14 mx-auto bg-brand-sand rounded-full flex items-center justify-center mb-4 text-brand-green text-2xl">
+                    <i class="fa-solid fa-wind"></i>
+                </div>
+                <h3 class="font-serif font-bold text-xl mb-2 text-brand-dark">Ambiente Agradável</h3>
+                <p class="text-gray-500 text-sm">Espaço amplo, climatizado, com banheiros impecáveis e mesas com vista para a rua.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="py-24 bg-brand-light overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Image -->
+                <div class="w-full lg:w-1/2 relative reveal">
+                    <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative z-10">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1000" alt="Ambiente do restaurante Girassol" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-brand-yellow rounded-full blur-3xl opacity-20 z-0"></div>
+                </div>
+                
+                <!-- Text -->
+                <div class="w-full lg:w-1/2 reveal delay-100">
+                    <h2 class="text-brand-yellow font-semibold tracking-wider uppercase text-sm mb-3">Nossa Experiência</h2>
+                    <h3 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">Um refúgio escondido no alto do Centro Histórico.</h3>
+                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+                        Localizado no 4º andar do prédio das Lojas Lebes, o Girassol Restaurante é aquele "tesouro escondido" que recompensa quem nos visita.
+                    </p>
+                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
+                        Esqueça a pressa e o barulho das ruas. Aqui você encontra um ambiente espaçoso, perfeitamente climatizado e com grandes janelas que oferecem uma vista incrível do coração de Porto Alegre. Nosso atendimento atencioso faz você se sentir em casa, seja para um almoço rápido de negócios ou uma refeição tranquila com a família.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-green mt-1"></i>
+                            <span class="text-gray-700 font-medium">Cardápio renovado diariamente</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-green mt-1"></i>
+                            <span class="text-gray-700 font-medium">Atendimento rápido e equipe cordial</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-green mt-1"></i>
+                            <span class="text-gray-700 font-medium">Estrutura acessível com elevadores</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destaques Cardápio Section -->
+    <section id="cardapio" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-brand-yellow font-semibold tracking-wider uppercase text-sm mb-3">Nosso Cardápio</h2>
+                <h3 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6">Abundância que dá gosto</h3>
+                <p class="text-gray-600 text-lg">Trabalhamos com o sistema de Buffet Livre, garantindo que você experimente um pouco de tudo com qualidade superior e frescor em cada prato.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="group cursor-pointer reveal rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800" alt="Carnes Grelhadas" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="font-serif text-2xl font-bold text-brand-dark mb-3">Carnes na Chapa</h4>
+                        <p class="text-gray-600">Nosso mestre churrasqueiro prepara cortes selecionados na hora. Delicie-se com vazio macio, costela suculenta, linguiça e a clássica polenta na chapa.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="group cursor-pointer reveal delay-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800" alt="Ilha de Saladas" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="font-serif text-2xl font-bold text-brand-dark mb-3">Ilhas Variadas</h4>
+                        <p class="text-gray-600">Um colorido buffet de saladas frescas, legumes e dezenas de opções de pratos quentes. Comida com tempero caseiro que abraça o estômago.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="group cursor-pointer reveal delay-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&q=80&w=800" alt="Sobremesas" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="font-serif text-2xl font-bold text-brand-dark mb-3">Doçura Inclusa</h4>
+                        <p class="text-gray-600">Sua refeição completa! Frutas da estação e sobremesas clássicas totalmente gratuitas no buffet, com destaque para o nosso famoso e elogiado pudim.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria / Social Proof Visual -->
+    <section class="py-12 bg-brand-dark text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 mb-10 text-center reveal">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Coma com os olhos</h2>
+            <p class="text-gray-400">Siga-nos no <a href="https://www.instagram.com/girassolrestaurante/" target="_blank" class="text-brand-yellow hover:underline">@girassolrestaurante</a></p>
+        </div>
+        
+        <!-- Scrolling Gallery -->
+        <div class="flex gap-4 px-4 overflow-x-auto no-scrollbar snap-x snap-mandatory reveal pb-8">
+            <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group">
+                <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Prato no restaurante">
+            </div>
+            <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group">
+                <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Carne assada">
+            </div>
+            <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Buffet variado">
+            </div>
+            <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group">
+                <img src="https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Sobremesa pudim">
+            </div>
+            <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Carnes e pratos quentes">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Avaliações -->
+    <section id="avaliacoes" class="py-24 bg-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div class="max-w-2xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="flex text-brand-yellow text-xl">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="font-bold text-xl text-brand-dark">4.7 / 5.0</span>
+                    </div>
+                    <h3 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-4">Aprovado por milhares</h3>
+                    <p class="text-gray-600 text-lg">Baseado em mais de 3.280 avaliações reais no Google Maps. Veja o que quem nos visita diz sobre a experiência.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow reveal">
+                    <div class="flex gap-1 text-brand-yellow mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic leading-relaxed">"O restaurante fica meio escondido em um prédio, mas vale super a pena! Valor super ok pela localização e qualidade! Tem VARIAS sobremesas deliciosas de graça, fora o buffet que é delicioso. Varias mesas ao lado das janelas que dá uma visão incrível! Recomendo conhecer!!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">JL</div>
+                        <div>
+                            <h5 class="font-bold text-brand-dark">Jonathan Lennert</h5>
+                            <p class="text-xs text-gray-500">Local Guide</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow reveal delay-100">
+                    <div class="flex gap-1 text-brand-yellow mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic leading-relaxed">"Eu amei o ambiente! Muita variedade e opções! Muitas frutas, comida salgada, petiscos, doces e também há carne assada com algumas opções de vazio, costela, linguiça e polentas (fica na chapa ao final do buffet)."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">LV</div>
+                        <div>
+                            <h5 class="font-bold text-brand-dark">Lari Viegas</h5>
+                            <p class="text-xs text-gray-500">Local Guide</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow reveal delay-200">
+                    <div class="flex gap-1 text-brand-yellow mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic leading-relaxed">"Comida maravilhosa, pudim maravilhoso!!! ótimo atendimento e ambiente muito agradável. Preço justo para uma refeição à vontade."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">CE</div>
+                        <div>
+                            <h5 class="font-bold text-brand-dark">Cristina Etchatz</h5>
+                            <p class="text-xs text-gray-500">Local Guide</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact -->
+    <section id="contato" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-dark rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+                
+                <!-- Info Side -->
+                <div class="w-full lg:w-5/12 p-10 md:p-16 flex flex-col justify-center text-white reveal">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8">Venha nos visitar</h2>
+                    
+                    <ul class="space-y-6 mb-10">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-brand-yellow">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Endereço</h4>
+                                <p class="text-gray-300">Av. Borges de Medeiros, 262<br>4° andar (Lojas Lebes)<br>Centro Histórico, Porto Alegre - RS</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-brand-yellow">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Horário</h4>
+                                <p class="text-gray-300">Aberto para o almoço<br>A partir das 11:00</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-brand-yellow">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Telefone</h4>
+                                <p class="text-gray-300">(51) 3225-0647</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="https://maps.google.com/?q=Girassol+Restaurante+Porto+Alegre" target="_blank" class="w-full py-4 rounded-xl bg-brand-yellow text-brand-dark text-center font-bold hover:bg-brand-yellowHover transition-colors flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-location-arrow"></i> Abrir no Google Maps
+                    </a>
+                </div>
+
+                <!-- Map Side -->
+                <div class="w-full lg:w-7/12 h-64 lg:h-auto min-h-[400px] relative reveal delay-100">
+                    <!-- Google Maps Iframe using the address -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.116744047814!2d-51.2312!3d-30.0294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAxJzQ1LjgiUyA1McKwMTMnNTIuMyJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
+                        class="absolute inset-0 w-full h-full border-0" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark pt-16 pb-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-sun text-brand-yellow text-3xl"></i>
+                    <span class="font-serif text-3xl font-bold tracking-tight text-white">Girassol</span>
+                </div>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/girassolrestaurante/" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-yellow hover:text-brand-dark transition-all">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                <p>&copy; 2023 Girassol Restaurante. Todos os direitos reservados.</p>
+                <p>Centro Histórico, Porto Alegre - RS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Sticky Navbar styling on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.replace('bg-white/90', 'bg-white/95');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.replace('bg-white/95', 'bg-white/90');
+            }
+        });
+
+        // Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOptions = {
+            threshold: 0.15, // Trigger when 15% of the element is visible
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Stop observing once revealed
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            // Check if element is already in viewport on load
+            if(el.getBoundingClientRect().top < window.innerHeight) {
+                el.classList.add('active');
+            } else {
+                revealObserver.observe(el);
+            }
+        });
+    </script>
+</body>
+</html>
