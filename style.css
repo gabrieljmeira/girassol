@@ -1,7 +1,11 @@
 /* 
- * Estilos personalizados e utilitários que o Tailwind não cobre nativamente.
- * Este arquivo é mantido enxuto para otimizar performance.
+ * Estilos personalizados da versão estável do Girassol Restaurante.
  */
+
+body {
+    background-color: #FAFAF9;
+    color: #1B2A22;
+}
 
 /* Animações de entrada suaves (Scroll Reveal) */
 .reveal {
@@ -15,7 +19,16 @@
     transform: translateY(0);
 }
 
-/* Ocultar barra de rolagem nas galerias horizontais */
+/* Delays para componentes em cascata */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+
+/* Overlay Escuro para Hero */
+.bg-overlay {
+    background: linear-gradient(180deg, rgba(27, 42, 34, 0.6) 0%, rgba(27, 42, 34, 0.9) 100%);
+}
+
+/* Ocultar barra de rolagem nativa nas galerias horizontais */
 .no-scrollbar::-webkit-scrollbar { 
     display: none; 
 }
@@ -23,4 +36,30 @@
 .no-scrollbar { 
     -ms-overflow-style: none; /* IE e Edge */
     scrollbar-width: none;    /* Firefox */
+}
+
+/* Placeholders Claros (Para Cardápio e Sobre - destacar a comida) */
+.img-placeholder-light {
+    background-color: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6B7280;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Placeholders Escuros (Para Hero e Galeria) */
+.img-placeholder-dark {
+    background-color: #2C4A3B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 1rem;
 }

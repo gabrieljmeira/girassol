@@ -1,9 +1,10 @@
 /**
- * Interações e funcionalidades do site.
- * Carregado com 'defer' para garantir a leitura completa do DOM antes da execução.
+ * Interações visuais e navegação.
+ * Carregado no final do DOM (antes do fechamento do body).
  */
+
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- 1. Controle do Menu Mobile ---
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Comportamento da Navbar Fixa ---
+    // --- 2. Comportamento da Navbar Fixa (Scroll) ---
     const navbar = document.getElementById('navbar');
     if (navbar) {
         window.addEventListener('scroll', () => {
@@ -37,10 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. Animações de Scroll Reveal (Intersection Observer) ---
     const revealElements = document.querySelectorAll('.reveal');
-    
+
     if (revealElements.length > 0) {
         const revealOptions = {
-            threshold: 0.15, // Aciona quando 15% do elemento estiver visível
+            threshold: 0.15,
             rootMargin: "0px 0px -50px 0px"
         };
         
@@ -49,12 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!entry.isIntersecting) return;
                 
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Para de observar após a animação
+                observer.unobserve(entry.target);
             });
         }, revealOptions);
 
         revealElements.forEach(el => {
-            // Se o elemento já estiver visível na tela inicial, ativa imediatamente
+            // Se o elemento estiver visível ao carregar a página, anima de imediato
             if (el.getBoundingClientRect().top < window.innerHeight) {
                 el.classList.add('active');
             } else {
@@ -62,4 +63,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 });
