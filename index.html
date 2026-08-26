@@ -14,88 +14,17 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (CDN para prototipagem estática) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-config.js"></script>
     
-    <!-- Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#1B2A22',      // Verde escuro principal (Hero, Galeria, Footer, Títulos)
-                            green: '#2C4A3B',     // Verde secundário
-                            yellow: '#EAB308',    // Amarelo dourado (CTAs e destaques)
-                            yellowHover: '#CA8A04',
-                            light: '#FAFAF9',     // Off-white (Fundos gerais para leveza)
-                            sand: '#F5F5F0',      // Fundo secundário (Avaliações)
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Custom CSS -->
-    <style>
-        body {
-            background-color: #FAFAF9;
-            color: #1B2A22;
-        }
-
-        /* Animações de entrada suaves */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-
-        .bg-overlay {
-            background: linear-gradient(180deg, rgba(27, 42, 34, 0.6) 0%, rgba(27, 42, 34, 0.9) 100%);
-        }
-
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Placeholders Claros (Para Cardápio e Sobre - destacar a comida) */
-        .img-placeholder-light {
-            background-color: #F3F4F6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6B7280;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        /* Placeholders Escuros (Para Hero e Galeria) */
-        .img-placeholder-dark {
-            background-color: #2C4A3B;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            text-align: center;
-            padding: 1rem;
-        }
-    </style>
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Scripts Funcionais -->
+    <script defer src="script.js"></script>
 </head>
-<body class="antialiased selection:bg-brand-yellow selection:text-brand-dark">
+<body class="bg-brand-light text-brand-dark antialiased selection:bg-brand-yellow selection:text-brand-dark">
 
     <!-- Navigation -->
     <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm">
@@ -139,15 +68,15 @@
         </div>
     </header>
 
-    <!-- Hero Section (Verde Escuro) -->
+    <!-- Hero Section -->
     <section class="relative h-[90vh] min-h-[600px] flex items-center justify-center pt-20">
-        <!-- Background Image -->
+        <!-- Background Image & Overlay -->
         <div class="absolute inset-0 z-0 bg-brand-dark">
             <img src="assets/fotos-reais/hero-fachada-buffet.jpg" 
                  alt="Visão geral do buffet do Girassol Restaurante" 
                  class="w-full h-full object-cover object-center opacity-60"
-                 onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-dark\'>[ Foto Real: Visão geral do Buffet ou Ambiente ]</div>'" />
-            <div class="absolute inset-0 bg-overlay"></div>
+                 onerror="this.outerHTML='<div class=\'w-full h-full bg-brand-green flex items-center justify-center text-white/50 text-sm text-center p-4\'>[ Foto Real: Visão geral do Buffet ou Ambiente ]</div>'" />
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/60 to-brand-dark/90"></div>
         </div>
 
         <!-- Content -->
@@ -183,7 +112,7 @@
         </div>
     </section>
 
-    <!-- Diferenciais (Fundo Branco) -->
+    <!-- Diferenciais -->
     <section class="relative z-20 -mt-12 px-4 max-w-7xl mx-auto">
         <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100">
             <div class="text-center md:px-6 reveal">
@@ -210,7 +139,7 @@
         </div>
     </section>
 
-    <!-- Sobre Section (Fundo Off-white) -->
+    <!-- Sobre Section -->
     <section id="sobre" class="py-24 bg-brand-light overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-16">
@@ -221,7 +150,7 @@
                              alt="Ambiente do restaurante Girassol" 
                              class="w-full h-full object-cover"
                              loading="lazy"
-                             onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-light\'>[ Foto Real: Ambiente interno (Mesas na janela) ]</div>'">
+                             onerror="this.outerHTML='<div class=\'w-full h-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm text-center p-4\'>[ Foto Real: Ambiente interno (Mesas na janela) ]</div>'">
                     </div>
                     <!-- Decorative element -->
                     <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-brand-yellow rounded-full blur-3xl opacity-20 z-0"></div>
@@ -258,7 +187,7 @@
         </div>
     </section>
 
-    <!-- Destaques Cardápio Section (Fundo Branco/Off-white) -->
+    <!-- Destaques Cardápio Section -->
     <section id="cardapio" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
@@ -275,7 +204,7 @@
                              alt="Carnes Grelhadas" 
                              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                              loading="lazy"
-                             onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-light group-hover:scale-105 transition-transform duration-700\'>[ Foto Real: Carnes na Chapa ]</div>'">
+                             onerror="this.outerHTML='<div class=\'w-full h-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm text-center p-4 group-hover:scale-105 transition-transform duration-700\'>[ Foto Real: Carnes na Chapa ]</div>'">
                     </div>
                     <div class="p-8 flex-1">
                         <h4 class="font-serif text-2xl font-bold text-brand-dark mb-3">Carnes na Chapa</h4>
@@ -290,7 +219,7 @@
                              alt="Ilha de Saladas" 
                              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                              loading="lazy"
-                             onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-light group-hover:scale-105 transition-transform duration-700\'>[ Foto Real: Ilha de Saladas/Pratos Quentes ]</div>'">
+                             onerror="this.outerHTML='<div class=\'w-full h-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm text-center p-4 group-hover:scale-105 transition-transform duration-700\'>[ Foto Real: Ilha de Saladas/Pratos Quentes ]</div>'">
                     </div>
                     <div class="p-8 flex-1">
                         <h4 class="font-serif text-2xl font-bold text-brand-dark mb-3">Pratos Quentes e Saladas</h4>
@@ -305,7 +234,7 @@
                              alt="Sobremesas" 
                              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                              loading="lazy"
-                             onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-light group-hover:scale-105 transition-transform duration-700\'>[ Foto Real: Pudim ou Frutas ]</div>'">
+                             onerror="this.outerHTML='<div class=\'w-full h-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm text-center p-4 group-hover:scale-105 transition-transform duration-700\'>[ Foto Real: Pudim ou Frutas ]</div>'">
                     </div>
                     <div class="p-8 flex-1">
                         <h4 class="font-serif text-2xl font-bold text-brand-dark mb-3">Sobremesas e Frutas</h4>
@@ -316,7 +245,7 @@
         </div>
     </section>
 
-    <!-- Galeria (Verde Escuro) -->
+    <!-- Galeria -->
     <section class="py-16 bg-brand-dark text-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 mb-10 text-center reveal">
             <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Nosso Restaurante</h2>
@@ -326,24 +255,24 @@
         <!-- Scrolling Gallery -->
         <div class="flex gap-4 px-4 overflow-x-auto no-scrollbar snap-x snap-mandatory reveal pb-4">
             <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group bg-brand-green">
-                <img src="assets/fotos-reais/galeria-1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 1" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-dark group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 1 ]</div>'">
+                <img src="assets/fotos-reais/galeria-1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 1" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full bg-brand-green flex items-center justify-center text-white/50 text-sm text-center p-4 group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 1 ]</div>'">
             </div>
             <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group bg-brand-green">
-                <img src="assets/fotos-reais/galeria-2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 2" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-dark group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 2 ]</div>'">
+                <img src="assets/fotos-reais/galeria-2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 2" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full bg-brand-green flex items-center justify-center text-white/50 text-sm text-center p-4 group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 2 ]</div>'">
             </div>
             <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group bg-brand-green">
-                <img src="assets/fotos-reais/galeria-3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 3" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-dark group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 3 ]</div>'">
+                <img src="assets/fotos-reais/galeria-3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 3" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full bg-brand-green flex items-center justify-center text-white/50 text-sm text-center p-4 group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 3 ]</div>'">
             </div>
             <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group bg-brand-green">
-                <img src="assets/fotos-reais/galeria-4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 4" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-dark group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 4 ]</div>'">
+                <img src="assets/fotos-reais/galeria-4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 4" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full bg-brand-green flex items-center justify-center text-white/50 text-sm text-center p-4 group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 4 ]</div>'">
             </div>
             <div class="flex-none w-72 h-72 md:w-80 md:h-80 snap-center rounded-xl overflow-hidden relative group bg-brand-green">
-                <img src="assets/fotos-reais/galeria-5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 5" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full img-placeholder-dark group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 5 ]</div>'">
+                <img src="assets/fotos-reais/galeria-5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Foto Instagram 5" loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full bg-brand-green flex items-center justify-center text-white/50 text-sm text-center p-4 group-hover:scale-110 transition-transform duration-700\'>[ Foto Instagram 5 ]</div>'">
             </div>
         </div>
     </section>
 
-    <!-- Testimonials (Fundo Areia/Sand) -->
+    <!-- Testimonials -->
     <section id="avaliacoes" class="py-24 bg-brand-sand">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
@@ -408,7 +337,7 @@
         </div>
     </section>
 
-    <!-- Location & Contact (Verde Escuro) -->
+    <!-- Location & Contact -->
     <section id="contato" class="py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-brand-dark rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
@@ -454,7 +383,6 @@
 
                 <!-- Map Side -->
                 <div class="w-full lg:w-7/12 h-64 lg:h-auto min-h-[400px] relative reveal delay-100 bg-gray-900">
-                    <!-- Google Maps Iframe real do local -->
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.116744047814!2d-51.2312!3d-30.0294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAxJzQ1LjgiUyA1McKwMTMnNTIuMyJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
                         class="absolute inset-0 w-full h-full border-0" 
@@ -488,57 +416,5 @@
             </div>
         </div>
     </footer>
-
-    <!-- Interactive Scripts -->
-    <script>
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu on click
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-
-        // Sticky Navbar styling on scroll
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                navbar.classList.add('shadow-md');
-                navbar.classList.replace('bg-white/95', 'bg-white/98');
-            } else {
-                navbar.classList.remove('shadow-md');
-                navbar.classList.replace('bg-white/98', 'bg-white/95');
-            }
-        });
-
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
-        };
-        const revealObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            });
-        }, revealOptions);
-
-        revealElements.forEach(el => {
-            if(el.getBoundingClientRect().top < window.innerHeight) {
-                el.classList.add('active');
-            } else {
-                revealObserver.observe(el);
-            }
-        });
-    </script>
 </body>
 </html>
